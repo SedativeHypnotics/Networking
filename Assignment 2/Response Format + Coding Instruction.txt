@@ -1,0 +1,47 @@
+Response format:
+
+2 byte query id
+2 byte flag
+2 byte question count
+2 byte answer count (let this be anscount)
+2 byte authority record count (let this be authoritycount)
+2 byte additional record count (let this be additionalcount)
+after this comes query description
+	the query consists of:
+	2 byte data that indicates how many parts the name has (let this be n)
+	then the next n bytes contain the domain parts
+	2 bytes containing 0x0000 that indicats the end of domain name
+	2 byte type
+	2 byte class
+after this comes 'anscount' number of answers
+	each answer section consists of:
+	2 byte name
+	2 byte record type
+	2 byte record class
+	4 byte TTL
+	2 byte that contains the ip address size (let this be addr_size)
+	'addr_size' byte address
+after this comes 'authoritycount' number of authority RRS
+	each authority RR consists of:
+	2 byte name
+	2 byte type
+	2 byte class
+	4 byte ttl data
+	2 byte data length (let it be len)
+	'len' byte that contains the name server full name
+after this comes additionalcount number of additional records
+	each additional record consists of:
+	2 byte name
+	2 byte type
+	2 byte class
+	4 byte TTL
+	2 byte data length (let it be len)
+	'len' byte that contains the server ip address
+
+*****************CODE READ DATA INSTRUCTION*****************
+To read 2 bytes use: readShort() method
+
+To read 4 bytes use: readInt() method
+
+To read separate domain name parts use: readByte() method
+	
