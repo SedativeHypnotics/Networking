@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <title>Musica - Music Store</title>
+    <meta name="author" content="Samnan Rahee, Sihan Tawsik">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hind+Siliguri"/>
+    <style>
+        body {
+            background-color: #292d3e;
+            color:#fafafa;
+            font-size: 100%;
+            font-family: "Titillium Web", "Hind Siliguri";
+            line-height: 1.7;
+            text-align: justify
+        }
+
+        .main {
+            max-width: 800px;
+            margin: 50px auto 50px
+        }
+
+        .grid3{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-content: center
+        }
+
+        .grid3 div{
+            margin: .5em auto .5em;
+        }
+        
+        .grid2{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-content: center
+        }
+
+        .grid2 div{
+            margin: .2em auto .2em;
+        }
+
+        .gridmain{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            align-content: center;
+            grid-template-areas:
+            "formbody contents contents contents";
+            overflow: hidden;
+            opacity: 0;
+            transform: translate3d(0, 500px, 0);
+            animation: arrive 500ms ease-in-out 0.9s forwards;
+        }
+        .gridmain div{
+            padding-right: .5em;
+        }
+        .contents{
+            grid-area: contents;
+        }
+        .formbody{
+            grid-area: formbody;
+        }
+
+        .card {
+            background-color: #0C0018;
+            color: #6FE7C5;
+            padding: .5em;
+            border-radius: 0.3em;
+            width:max-content;
+            margin: 1em;
+        }
+        .card:hover {
+            background-color: #ff5572;
+            color: #0C0018;
+        }
+
+        .left{
+            float: left;
+        }
+
+        .right{
+            float: right;
+        }
+        
+        button {
+            background: #ffffcc;
+            border: #ffffcc;
+            color: #0C0018;
+            padding: 0em 2em 0em 2em;
+            border-radius: 0.2em;
+            width:max-content;
+            margin: 1px;
+        }
+
+        button:hover {
+            background: #0C0018;
+            border: #0C0018;
+            color: #fafafa;
+            padding: 0em 2em 0em 2em;
+            border-radius: 0.2em;
+            width:max-content;
+            margin: 1px;
+        }
+
+        .button{
+            background: #ff5572;
+            border: #ff5572;
+            color: #0C0018;
+            padding: 1em 2em 1em 2em;
+            border-radius: 0.2em;
+            width:max-content;
+            margin: 1px;
+        }
+        .button:hover {
+            background: #0C0018;
+            border: #0C0018;
+            color: #fafafa;
+            padding: 1em 2em 1em 2em;
+            border-radius: 0.2em;
+            width:fit-content;
+            margin: 1px;
+        }
+        .formlabel{
+            font-size: 80%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Iceland", cursive, "Hind Siliguri", sans-serif;
+            text-align: left
+        }
+
+        .header-date {
+            text-align: right
+        }
+
+        h1 {
+            color: #ff5572
+        }
+
+        h2 {
+            color: #82aaff
+        }
+
+        img {
+            display: block;
+            width: 250px;
+            height: auto;
+            margin: auto
+        }
+
+        code,
+        pre {
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background-color: #0C0018;
+            color: #6FE7C5;
+            padding: 0.2em;
+            border-radius: 0.2em
+        }
+
+        pre {
+            padding: 0.5em;
+            border-radius: 0.3em
+        }
+
+        .poetry {
+            font-family: "Hind Siliguri", sans-serif;
+            background-color: #292d3e;
+            color:#fafafa;
+            text-align: justify;
+        }
+
+        a:link {
+            color: #fafafa;
+            text-decoration: underline
+        }
+
+        a:visited {
+            color: #fff
+        }
+
+        a:hover {
+            color: #000;
+            background-color: #fff;
+            text-decoration: none;
+            border-radius: 0.1em
+        }
+
+        hr {
+            margin: 25px auto 25px;
+            color: #fafafa
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.75rem 0
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid #fafafa;
+            padding: 10px
+        }
+
+        .form {
+            margin-top: 40px;
+            border-radius: 6px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translate3d(0, 500px, 0);
+            animation: arrive 500ms ease-in-out 0.9s forwards;
+        }
+
+        .form--no {
+            animation: NO 1s ease-in-out;
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .form__input {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            -webkit-appearance: none;
+            border: 0;
+            outline: 0;
+            transition: 0.3s;
+        }
+
+        .form__input:focus {
+            background: darken(#fafafa, 3%);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            -webkit-appearance: none;
+            outline: 0;
+            border: 0;
+            color: white;
+            background: #ff5572;
+            color: #0C0018;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0C0018;
+            color: #ff5572;
+        }
+
+        @keyframes NO {
+        from, to {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        10%, 30%, 50%, 70%, 90% {
+            -webkit-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+        }
+
+        20%, 40%, 60%, 80% {
+            -webkit-transform: translate3d(10px, 0, 0);
+            transform: translate3d(10px, 0, 0);
+        }
+        }
+
+        @keyframes arrive {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 50px, 0);
+            }
+            
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes move {
+            0% {
+                background-position: 0 0
+            }
+            50% {
+                background-position: 100% 0
+            }
+            100% {
+                background-position: 0 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Musica</h1>
+    <div class="gridmain">
+        <div class="formbody">
+            <h2> Buy Disks</h2> <hr/>
+            <div>
+                <form class="form" method="post">
+                    <div class="form__group">
+                        <input type="number" name="item-no" required="true" class="form__input" placeholder="Item no.">
+                    </div>
+                    <div class="form__group">
+                        <input type="number" name="quantity" required="true" class="form__input" placeholder="Quantity">
+                    </div>
+                    <div class="form__group">
+                        <input type="text" name="first-name" required="true" class="form__input" placeholder="Firstname">
+                    </div>
+                    <div class="form__group">
+                        <input type="text" name="last-name" required="true" class="form__input" placeholder="Lastname">
+                    </div>
+                    <div class="form__group">
+                        <input type="number" name="post-code" required="true" class="form__input" placeholder="Post Code">
+                    </div>
+                    <div class="form__group">
+                        <input type="number" name="credit-card" required="true" class="form__input" placeholder="Credit Card No.">
+                    </div>
+                    <input class="btn" type="submit" value="Buy" name="" class="form__input">
+                </form>
+            </div>
+        </div>
+        <div class="contents">
+            <h2>International Collection</h2>
+            <hr/>
+            <div class="grid3">
+                <div class="card">
+                    <img src="https://secure.i.telegraph.co.uk/multimedia/archive/02009/1977-animals_2009651i.jpg"/>
+                    <p>Animals - Pink Floyd</p>
+                    <p>ID: 01</p> <p>Price: 200tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://ring.cdandlp.com/grigo/photo_grande/114769906.jpg"/>
+                    <p>20 Greatest Hits - The Beatles</p>
+                    <p>ID: 02</p> <p>Price: 200tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://cdn.shopify.com/s/files/1/0784/1125/products/STS2010_2048x.jpg?v=1484709771"/>
+                    <p>Station to station - David Bowie</p>
+                    <p>ID: 03</p> <p>Price: 200tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://satchmi.com/wp-content/uploads/2017/03/R-7541590-1454191448-7223.jpeg.jpg" />
+                    <p>Queen II - Queen</p>
+                    <p>ID: 04</p> <p>Price: 200tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://cps-static.rovicorp.com/3/JPG_500/MI0000/166/MI0000166917.jpg?partner=allrovi.com" />
+                    <p>Baez Sings Dylan - Joan Baez</p>
+                    <p>ID: 05</p> <p>Price: 200tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://is4-ssl.mzstatic.com/image/thumb/Music3/v4/83/05/1c/83051c3d-05da-715e-bc2c-4a174135023b/dj.qusytvtz.jpg/1200x630bb.jpg" />
+                    <p>Elvis Presley 30 #1 Hits - Elvis Presley</p>
+                    <p>ID: 06</p> <p>Price: 200tk</p>
+                </div>
+            </div>
+            <h2>Local Collection</h2>
+            <hr/>
+            <div class="grid3">
+                <div class="card">
+                    <img src="http://images.genius.com/0ae8f707280d8e3ca1e433c1773fb254.925x925x1.jpg" />
+                    <p>অনিকেত প্রান্তর - আর্টসেল</p>
+                    <p>ID: 07</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/71hsqpHzlmL._SS500_.jpg" />
+                    <p>আবার বছরকুড়ি পরে - মহীনের ঘোড়াগুলি</p>
+                    <p>ID: 08</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://direct.rhapsody.com/imageserver/images/Alb.270143768/500x500.jpg" />
+                    <p>বেস্ট অব গুরু জেমস - জেমস</p>
+                    <p>ID: 09</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/718R+L3ptNL._SS500_.jpg" />
+                    <p>মন্তব্য নিষ্প্রয়োজন - আর্বোভাইরাস</p>
+                    <p>ID: 10</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://f4.bcbits.com/img/a2782395095_10.jpg" />
+                    <p>কখন কিভাবে এখানে কে জানে - ইন্দালো</p>
+                    <p>ID: 11</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://images-na.ssl-images-amazon.com/images/I/51mrUJ7KfuL._SS500.jpg" />
+                    <p>বাংলাদেশ ২ - আজম খান</p>
+                    <p>ID: 12</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://c.saavncdn.com/267/Hridoypur-Bengali-2016-500x500.jpg" />
+                    <p>হৃদয়পুর - দলছুট</p>
+                    <p>ID: 13</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://e.snmc.io/i/600/w/8eb6017e003c59130696f377fbf79af6/7219130" />
+                    <p>বিবর্তন - অর্থহীন</p>
+                    <p>ID: 14</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://3.bp.blogspot.com/-prsJRXunwFI/W3GQ8dfkuPI/AAAAAAAABhQ/O1fAVIGlFe4GY_-3fRWagg0H6tCzkk27wCLcBGAs/s1600/Icche%2BGhuri%2B%255BArtwork%255D.jpg" />
+                    <p>ইচ্ছে ঘুড়ি - শিরোনামহীন</p>
+                    <p>ID: 15</p> <p>Price: 120tk</p>
+                </div>
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/28/Bondho_Janala_Cover.jpg/220px-Bondho_Janala_Cover.jpg" />
+                    <p>বন্ধ জানালা - শিরোনামহীন</p>
+                    <p>ID: 16</p> <p>Price: 120tk</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
